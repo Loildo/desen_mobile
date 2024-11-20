@@ -66,7 +66,7 @@ class ValoresScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'R\$',
+                          'R\$ 40,00',
                           style: TextStyle(
                             fontSize: 16,
                             color: Color(0xff5271ff),
@@ -79,14 +79,14 @@ class ValoresScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Porte Medio',
+                          'Porte médio',
                           style: TextStyle(
                             fontSize: 16,
                             color: Color(0xff5271ff),
                           ),
                         ),
                         Text(
-                          'R\$',
+                          'R\$ 60,00',
                           style: TextStyle(
                             fontSize: 16,
                             color: Color(0xff5271ff),
@@ -106,7 +106,7 @@ class ValoresScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'R\$',
+                          'R\$ 80,00',
                           style: TextStyle(
                             fontSize: 16,
                             color: Color(0xff5271ff),
@@ -156,7 +156,7 @@ class ValoresScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'R\$',
+                          'R\$ 50,00',
                           style: TextStyle(
                             fontSize: 16,
                             color: Color(0xff5271ff),
@@ -169,14 +169,14 @@ class ValoresScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Porte Medio',
+                          'Porte médio',
                           style: TextStyle(
                             fontSize: 16,
                             color: Color(0xff5271ff),
                           ),
                         ),
                         Text(
-                          'R\$',
+                          'R\$ 80,00',
                           style: TextStyle(
                             fontSize: 16,
                             color: Color(0xff5271ff),
@@ -196,7 +196,7 @@ class ValoresScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'R\$',
+                          'R\$ 120,00',
                           style: TextStyle(
                             fontSize: 16,
                             color: Color(0xff5271ff),
@@ -208,7 +208,6 @@ class ValoresScreen extends StatelessWidget {
                 ),
               ),
             ),
-
           ],
         ),
       ),
