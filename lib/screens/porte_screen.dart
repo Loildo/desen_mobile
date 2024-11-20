@@ -6,41 +6,36 @@ class PorteScreen extends StatefulWidget {
 }
 
 class _PorteScreenState extends State<PorteScreen> {
-  // Variável para armazenar qual porte foi selecionado
   String? selectedPorte;
+  String? servicoSelecionado;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Capturando o argumento enviado da tela anterior
+    final args = ModalRoute.of(context)!.settings.arguments as Map?;
+    if (args != null && args['servico'] != null) {
+      setState(() {
+        servicoSelecionado = args['servico'];
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff5271ff), // Cor de fundo azul
+      backgroundColor: Color(0xff5271ff),
       body: SafeArea(
         child: Column(
           children: [
-            // Adiciona um espaço no topo para centralizar melhor os elementos
             Spacer(),
-
-            // Logo e título "Pet Feliz"
             Text(
               'Pet Feliz',
-              style: TextStyle(
-                fontSize: 36,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 36, color: Colors.white, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
-
-            // Título "Agendamento"
-            Text(
-              'Agendamento',
-              style: TextStyle(
-                fontSize: 28,
-                color: Colors.white,
-              ),
-            ),
+            Text('Agendamento', style: TextStyle(fontSize: 28, color: Colors.white)),
             SizedBox(height: 40),
-
-            // Container com as opções de porte
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Container(
@@ -51,6 +46,15 @@ class _PorteScreenState extends State<PorteScreen> {
                 ),
                 child: Column(
                   children: [
+                    // Exibindo o serviço selecionado dentro do formulário
+                    if (servicoSelecionado != null)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20), // Um pouco de espaço abaixo
+                        child: Text(
+                          'Serviço: $servicoSelecionado', // Exibindo "Banho" ou "Tosa"
+                          style: TextStyle(fontSize: 22, color: Color(0xff5271ff)),
+                        ),
+                      ),
                     // Opção Porte Pequeno
                     Row(
                       children: [
@@ -59,24 +63,17 @@ class _PorteScreenState extends State<PorteScreen> {
                           onChanged: (bool? value) {
                             setState(() {
                               if (value == true) {
-                                selectedPorte = 'Pequeno'; // Seleciona o "Porte Pequeno"
+                                selectedPorte = 'Pequeno';
                               } else {
-                                selectedPorte = null; // Desmarca se o usuário desmarcar
+                                selectedPorte = null;
                               }
                             });
                           },
                           activeColor: Color(0xff5271ff),
                         ),
-                        Text(
-                          'Porte pequeno',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xff5271ff),
-                          ),
-                        ),
+                        Text('Porte pequeno', style: TextStyle(fontSize: 18, color: Color(0xff5271ff))),
                       ],
                     ),
-
                     // Opção Porte Médio
                     Row(
                       children: [
@@ -85,24 +82,17 @@ class _PorteScreenState extends State<PorteScreen> {
                           onChanged: (bool? value) {
                             setState(() {
                               if (value == true) {
-                                selectedPorte = 'Medio'; // Seleciona o "Porte Médio"
+                                selectedPorte = 'Medio';
                               } else {
-                                selectedPorte = null; // Desmarca se o usuário desmarcar
+                                selectedPorte = null;
                               }
                             });
                           },
                           activeColor: Color(0xff5271ff),
                         ),
-                        Text(
-                          'Porte Medio',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xff5271ff),
-                          ),
-                        ),
+                        Text('Porte Medio', style: TextStyle(fontSize: 18, color: Color(0xff5271ff))),
                       ],
                     ),
-
                     // Opção Porte Grande
                     Row(
                       children: [
@@ -111,62 +101,72 @@ class _PorteScreenState extends State<PorteScreen> {
                           onChanged: (bool? value) {
                             setState(() {
                               if (value == true) {
-                                selectedPorte = 'Grande'; // Seleciona o "Porte Grande"
+                                selectedPorte = 'Grande';
                               } else {
-                                selectedPorte = null; // Desmarca se o usuário desmarcar
+                                selectedPorte = null;
                               }
                             });
                           },
                           activeColor: Color(0xff5271ff),
                         ),
-                        Text(
-                          'Porte grande',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xff5271ff),
-                          ),
-                        ),
+                        Text('Porte grande', style: TextStyle(fontSize: 18, color: Color(0xff5271ff))),
                       ],
                     ),
                   ],
                 ),
               ),
             ),
-
-            // Espaço entre a lista de checkboxes e o botão "Próximo"
             SizedBox(height: 30),
-
-            // Botão Próximo
+            // Botões "Voltar" e "Próximo" na mesma linha
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: ElevatedButton(
-                onPressed: selectedPorte != null
-                    ? () {
-                        // Redireciona para a tela "/horario"
-                        Navigator.pushNamed(context, '/horario');
-                      }
-                    : null, // Botão desabilitado se nenhum checkbox for selecionado
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xff5271ff), // Cor de fundo azul
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween, // Alinha os botões
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Voltar para a tela anterior
+                      Navigator.pop(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                    ),
+                    child: Text(
+                      'Voltar',
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                ),
-                child: Text(
-                  'Próximo',
-                  style: TextStyle(
-                    fontSize: 18,
-                    // Cor do texto do botão depende se está desabilitado ou não
-                    color: selectedPorte != null ? Colors.white : Color(0xff5271ff),
+                  ElevatedButton(
+                    onPressed: selectedPorte != null
+                        ? () {
+                            // Passa o valor selecionado para a tela de HorarioScreen
+                            Navigator.pushNamed(
+                              context,
+                              '/horario',
+                              arguments: selectedPorte, // Passando o porte como argumento
+                            );
+                          }
+                        : null,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xff5271ff),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                    ),
+                    child: Text(
+                      'Próximo',
+                      style: TextStyle(fontSize: 18, color: selectedPorte != null ? Colors.white : Color(0xff5271ff)),
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
-
-            // Adiciona um espaço no final para centralizar melhor os elementos
             Spacer(),
-
             // Pegadas decorativas na parte inferior
             Padding(
               padding: const EdgeInsets.only(right: 16.0, bottom: 16.0),

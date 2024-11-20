@@ -21,7 +21,13 @@ class ServicoScreen extends StatelessWidget {
             // Botão Banho
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/porte');
+                Navigator.pushNamed(
+                  context,
+                  '/porte',
+                  arguments: {
+                    'servico': 'Banho', // Passando o serviço selecionado
+                  },
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
@@ -40,7 +46,13 @@ class ServicoScreen extends StatelessWidget {
             // Botão Tosa
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/porte');
+                Navigator.pushNamed(
+                  context,
+                  '/porte',
+                  arguments: {
+                    'servico': 'Tosa', // Passando o serviço selecionado
+                  },
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
