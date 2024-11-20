@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
-class PorteScreen extends StatelessWidget {
+class PorteScreen extends StatefulWidget {
+  @override
+  _PorteScreenState createState() => _PorteScreenState();
+}
+
+class _PorteScreenState extends State<PorteScreen> {
+  // Variável para armazenar qual porte foi selecionado
+  String? selectedPorte;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,8 +55,16 @@ class PorteScreen extends StatelessWidget {
                     Row(
                       children: [
                         Checkbox(
-                          value: false,
-                          onChanged: (bool? value) {},
+                          value: selectedPorte == 'Pequeno',
+                          onChanged: (bool? value) {
+                            setState(() {
+                              if (value == true) {
+                                selectedPorte = 'Pequeno'; // Seleciona o "Porte Pequeno"
+                              } else {
+                                selectedPorte = null; // Desmarca se o usuário desmarcar
+                              }
+                            });
+                          },
                           activeColor: Color(0xff5271ff),
                         ),
                         Text(
@@ -65,8 +81,16 @@ class PorteScreen extends StatelessWidget {
                     Row(
                       children: [
                         Checkbox(
-                          value: false,
-                          onChanged: (bool? value) {},
+                          value: selectedPorte == 'Medio',
+                          onChanged: (bool? value) {
+                            setState(() {
+                              if (value == true) {
+                                selectedPorte = 'Medio'; // Seleciona o "Porte Médio"
+                              } else {
+                                selectedPorte = null; // Desmarca se o usuário desmarcar
+                              }
+                            });
+                          },
                           activeColor: Color(0xff5271ff),
                         ),
                         Text(
@@ -83,8 +107,16 @@ class PorteScreen extends StatelessWidget {
                     Row(
                       children: [
                         Checkbox(
-                          value: false,
-                          onChanged: (bool? value) {},
+                          value: selectedPorte == 'Grande',
+                          onChanged: (bool? value) {
+                            setState(() {
+                              if (value == true) {
+                                selectedPorte = 'Grande'; // Seleciona o "Porte Grande"
+                              } else {
+                                selectedPorte = null; // Desmarca se o usuário desmarcar
+                              }
+                            });
+                          },
                           activeColor: Color(0xff5271ff),
                         ),
                         Text(
@@ -97,6 +129,37 @@ class PorteScreen extends StatelessWidget {
                       ],
                     ),
                   ],
+                ),
+              ),
+            ),
+
+            // Espaço entre a lista de checkboxes e o botão "Próximo"
+            SizedBox(height: 30),
+
+            // Botão Próximo
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: ElevatedButton(
+                onPressed: selectedPorte != null
+                    ? () {
+                        // Redireciona para a tela "/horario"
+                        Navigator.pushNamed(context, '/horario');
+                      }
+                    : null, // Botão desabilitado se nenhum checkbox for selecionado
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xff5271ff), // Cor de fundo azul
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                ),
+                child: Text(
+                  'Próximo',
+                  style: TextStyle(
+                    fontSize: 18,
+                    // Cor do texto do botão depende se está desabilitado ou não
+                    color: selectedPorte != null ? Colors.white : Color(0xff5271ff),
+                  ),
                 ),
               ),
             ),
