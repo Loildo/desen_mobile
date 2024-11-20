@@ -1,15 +1,65 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
+
+  
+  void _validarLogin() {
+    String email = _emailController.text;
+    String senha = _senhaController.text;
+
+    
+    if (email == "teste@teste.teste" && senha == "123") {
+      
+      Navigator.pushNamed(context, '/agendamento');
+    } else {
+      
+      _mostrarErro();
+    }
+  }
+
+  
+  void _mostrarErro() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Erro'),
+          content: Text('Email e senhas incorretos'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); 
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  
+  bool _isFormValid() {
+    return _emailController.text.isNotEmpty && _senhaController.text.isNotEmpty;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff4f6ff),  // Fundo branco suave
+      backgroundColor: Color(0xfff4f6ff),  
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Logo e título
+            
             Text(
               'Pet Feliz',
               style: TextStyle(
@@ -20,11 +70,11 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 40),
 
-            // Formulário
+            
             Container(
               padding: EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: Color(0xff5271ff), // Cor de fundo do container azul
+                color: Color(0xff5271ff), 
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30),
                   topRight: Radius.circular(30),
@@ -41,8 +91,9 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 24),
-                  // Campo Email
+                  
                   TextFormField(
+                    controller: _emailController,  
                     decoration: InputDecoration(
                       hintText: 'Email',
                       filled: true,
@@ -53,10 +104,14 @@ class LoginScreen extends StatelessWidget {
                         borderSide: BorderSide.none,
                       ),
                     ),
+                    onChanged: (text) {
+                      setState(() {}); 
+                    },
                   ),
                   SizedBox(height: 16),
-                  // Campo Senha
+                  
                   TextFormField(
+                    controller: _senhaController,  
                     decoration: InputDecoration(
                       hintText: 'Senha',
                       filled: true,
@@ -68,16 +123,17 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     obscureText: true,
+                    onChanged: (text) {
+                      setState(() {}); 
+                    },
                   ),
                   SizedBox(height: 24),
-                  // Botão Entrar
+                  
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/agendamento');
-                    },
+                    onPressed: _isFormValid() ? _validarLogin : null,  
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,  // Cor de fundo do botão
-                      foregroundColor: Color(0xff5271ff),  // Cor do texto
+                      backgroundColor: Colors.white,  
+                      foregroundColor: Color(0xff5271ff),  
                       padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
@@ -92,10 +148,10 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 16),
-                  // Link para recuperação de senha
+                  
                   GestureDetector(
                     onTap: () {
-                      // Ação para recuperação de senha
+                      
                     },
                     child: Text(
                       'Esqueceu a senha?',
@@ -112,5 +168,13 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    
+    _emailController.dispose();
+    _senhaController.dispose();
+    super.dispose();
   }
 }
