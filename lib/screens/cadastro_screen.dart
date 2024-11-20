@@ -1,15 +1,85 @@
 import 'package:flutter/material.dart';
 
-class CadastroScreen extends StatelessWidget {
+class CadastroScreen extends StatefulWidget {
+  @override
+  _CadastroScreenState createState() => _CadastroScreenState();
+}
+
+class _CadastroScreenState extends State<CadastroScreen> {
+  
+  final TextEditingController _nomeController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
+
+  
+  void _validarCadastro() {
+    
+    String nome = _nomeController.text;
+    String email = _emailController.text;
+    String senha = _senhaController.text;
+
+    
+    if (nome.isEmpty || email.isEmpty || senha.isEmpty) {
+      
+      _mostrarAlerta('Campos não preenchidos. Por favor, preencha todos os campos.');
+    } else {
+      
+      _mostrarModalSucesso();
+    }
+  }
+
+  
+  void _mostrarAlerta(String mensagem) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Erro'),
+          content: Text(mensagem),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); 
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  
+  void _mostrarModalSucesso() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Sucesso'),
+          content: Text('Cadastro realizado com sucesso!'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); 
+                Navigator.pushNamed(context, '/login'); 
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff4f6ff),  // Fundo branco suave
+      backgroundColor: Color(0xfff4f6ff),  
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Logo e título
+            
             Text(
               'Pet Feliz',
               style: TextStyle(
@@ -20,11 +90,11 @@ class CadastroScreen extends StatelessWidget {
             ),
             SizedBox(height: 40),
 
-            // Formulário
+            
             Container(
               padding: EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: Color(0xff5271ff), // Cor de fundo do container azul
+                color: Color(0xff5271ff), 
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30),
                   topRight: Radius.circular(30),
@@ -41,8 +111,9 @@ class CadastroScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 24),
-                  // Campo Nome
+                  
                   TextFormField(
+                    controller: _nomeController,  
                     decoration: InputDecoration(
                       hintText: 'Nome',
                       filled: true,
@@ -55,8 +126,9 @@ class CadastroScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 16),
-                  // Campo Email
+                  
                   TextFormField(
+                    controller: _emailController,  
                     decoration: InputDecoration(
                       hintText: 'Email',
                       filled: true,
@@ -69,8 +141,9 @@ class CadastroScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 16),
-                  // Campo Senha
+                  
                   TextFormField(
+                    controller: _senhaController,  
                     decoration: InputDecoration(
                       hintText: 'Senha',
                       filled: true,
@@ -84,14 +157,12 @@ class CadastroScreen extends StatelessWidget {
                     obscureText: true,
                   ),
                   SizedBox(height: 24),
-                  // Botão Cadastrar
+                  
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/login');
-                    },
+                    onPressed: _validarCadastro,  
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,  // Use backgroundColor em vez de primary
-                      foregroundColor: Color(0xff5271ff),  // Use foregroundColor em vez de onPrimary
+                      backgroundColor: Colors.white,  
+                      foregroundColor: Color(0xff5271ff),  
                       padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
@@ -106,7 +177,7 @@ class CadastroScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 16),
-                  // Link para Login
+                  
                   GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(context, '/login');
@@ -126,5 +197,14 @@ class CadastroScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    
+    _nomeController.dispose();
+    _emailController.dispose();
+    _senhaController.dispose();
+    super.dispose();
   }
 }
