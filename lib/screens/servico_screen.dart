@@ -8,7 +8,7 @@ class ServicoScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            // Conteúdo principal da tela
+            
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -22,14 +22,14 @@ class ServicoScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 50),
-                  // Botão Banho
+                  
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(
                         context,
                         '/porte',
                         arguments: {
-                          'servico': 'Banho', // Passando o serviço selecionado
+                          'servico': 'Banho', 
                         },
                       );
                     },
@@ -47,14 +47,14 @@ class ServicoScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 20),
-                  // Botão Tosa
+                  
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(
                         context,
                         '/porte',
                         arguments: {
-                          'servico': 'Tosa', // Passando o serviço selecionado
+                          'servico': 'Tosa', 
                         },
                       );
                     },
@@ -75,14 +75,14 @@ class ServicoScreen extends StatelessWidget {
               ),
             ),
 
-            // Botão Voltar
+            
             Positioned(
               top: 20,
               left: 20,
               child: IconButton(
                 icon: Icon(Icons.arrow_back, color: Colors.white),
                 onPressed: () {
-                  Navigator.pop(context);  // Vai voltar para a tela anterior
+                  Navigator.pop(context);  
                 },
               ),
             ),

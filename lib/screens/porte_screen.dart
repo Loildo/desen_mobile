@@ -12,7 +12,7 @@ class _PorteScreenState extends State<PorteScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Capturando o argumento enviado da tela anterior
+    
     final args = ModalRoute.of(context)!.settings.arguments as Map?;
     if (args != null && args['servico'] != null) {
       setState(() {
@@ -28,7 +28,7 @@ class _PorteScreenState extends State<PorteScreen> {
       body: SafeArea(
         child: Stack(
           children: [
-            // Conteúdo principal da tela
+            
             Column(
               children: [
                 Spacer(),
@@ -49,16 +49,16 @@ class _PorteScreenState extends State<PorteScreen> {
                     ),
                     child: Column(
                       children: [
-                        // Exibindo o serviço selecionado dentro do formulário
+                        
                         if (servicoSelecionado != null)
                           Padding(
-                            padding: const EdgeInsets.only(bottom: 20), // Um pouco de espaço abaixo
+                            padding: const EdgeInsets.only(bottom: 20), 
                             child: Text(
-                              'Serviço: $servicoSelecionado', // Exibindo "Banho" ou "Tosa"
+                              'Serviço: $servicoSelecionado', 
                               style: TextStyle(fontSize: 22, color: Color(0xff5271ff)),
                             ),
                           ),
-                        // Opção Porte Pequeno
+                        
                         Row(
                           children: [
                             Checkbox(
@@ -77,7 +77,7 @@ class _PorteScreenState extends State<PorteScreen> {
                             Text('Porte pequeno', style: TextStyle(fontSize: 18, color: Color(0xff5271ff))),
                           ],
                         ),
-                        // Opção Porte Médio
+                        
                         Row(
                           children: [
                             Checkbox(
@@ -96,7 +96,7 @@ class _PorteScreenState extends State<PorteScreen> {
                             Text('Porte Medio', style: TextStyle(fontSize: 18, color: Color(0xff5271ff))),
                           ],
                         ),
-                        // Opção Porte Grande
+                        
                         Row(
                           children: [
                             Checkbox(
@@ -120,20 +120,20 @@ class _PorteScreenState extends State<PorteScreen> {
                   ),
                 ),
                 SizedBox(height: 30),
-                // Botões "Próximo" na parte inferior da tela
+                
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center, // Centraliza os botões
+                    mainAxisAlignment: MainAxisAlignment.center, 
                     children: [
                       ElevatedButton(
                         onPressed: selectedPorte != null
                             ? () {
-                                // Passa o valor selecionado para a tela de HorarioScreen
+                                
                                 Navigator.pushNamed(
                                   context,
                                   '/horario',
-                                  arguments: selectedPorte, // Passando o porte como argumento
+                                  arguments: selectedPorte, 
                                 );
                               }
                             : null,
@@ -153,7 +153,7 @@ class _PorteScreenState extends State<PorteScreen> {
                   ),
                 ),
                 Spacer(),
-                // Pegadas decorativas na parte inferior
+                
                 Padding(
                   padding: const EdgeInsets.only(right: 16.0, bottom: 16.0),
                   child: Align(
@@ -173,14 +173,14 @@ class _PorteScreenState extends State<PorteScreen> {
               ],
             ),
 
-            // Botão Voltar no canto superior esquerdo
+            
             Positioned(
               top: 20,
               left: 20,
               child: IconButton(
                 icon: Icon(Icons.arrow_back, color: Colors.white),
                 onPressed: () {
-                  Navigator.pop(context);  // Vai voltar para a tela anterior
+                  Navigator.pop(context);  
                 },
               ),
             ),

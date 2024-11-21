@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class HorarioScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Recuperando o valor de 'porte' passado pela tela anterior
+    
     final String? selectedPorte = ModalRoute.of(context)?.settings.arguments as String?;
 
     return Scaffold(
@@ -11,7 +11,7 @@ class HorarioScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            // Conteúdo principal da tela
+            
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -40,9 +40,9 @@ class HorarioScreen extends StatelessWidget {
 
                         return ElevatedButton(
                           onPressed: () {
-                            // Ação ao selecionar um horário
+                            
                             print('Horário selecionado: $horaFormatada');
-                            // Redireciona para a tela "/dados_agendamento" e passa o porte e horário
+                            
                             Navigator.pushNamed(
                               context,
                               '/dados_agendamento',
@@ -73,14 +73,14 @@ class HorarioScreen extends StatelessWidget {
               ],
             ),
 
-            // Botão Voltar no canto superior esquerdo
+            
             Positioned(
               top: 20,
               left: 20,
               child: IconButton(
                 icon: Icon(Icons.arrow_back, color: Colors.white),
                 onPressed: () {
-                  Navigator.pop(context);  // Vai voltar para a tela anterior
+                  Navigator.pop(context);  
                 },
               ),
             ),

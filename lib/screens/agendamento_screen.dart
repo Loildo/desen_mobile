@@ -2,18 +2,9 @@ import 'package:flutter/material.dart';
 
 class AgendamentoScreen extends StatelessWidget {
 
-  // Função de deslogar o usuário
+  
   void _deslogarUsuario(BuildContext context) {
     print("sair");
-    // Aqui você deve colocar sua lógica de deslogar o usuário.
-    // Exemplo com FirebaseAuth (deslogando o usuário):
-    // FirebaseAuth.instance.signOut();
-    
-    // Exemplo com SharedPreferences:
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // prefs.clear();
-
-    // Após deslogar, redireciona para a tela inicial de login (por exemplo)
     Navigator.pushReplacementNamed(context, '/login');
   }
 
@@ -34,7 +25,7 @@ class AgendamentoScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 50),
-            // Botão de Agendamento
+            
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/servico');
@@ -53,7 +44,7 @@ class AgendamentoScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            // Botão de Valores
+            
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/valores');
@@ -72,7 +63,7 @@ class AgendamentoScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            // Botão de Sair
+            
             ElevatedButton(
               onPressed: () => _deslogarUsuario(context),
               style: ElevatedButton.styleFrom(

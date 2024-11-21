@@ -15,7 +15,7 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
   String? selectedHorario;
 
   bool _isFormValid() {
-    // Verificar se todos os campos obrigatórios foram preenchidos
+    
     return _nomePetController.text.isNotEmpty &&
         _idadeController.text.isNotEmpty &&
         (_isMacho || _isFemea) &&
@@ -24,18 +24,18 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
   }
 
   void _enviarFormulario() {
-    // Função para enviar os dados do formulário
+    
     if (_isFormValid()) {
-      // Se o formulário for válido, colete os dados e envie (ou mostre uma mensagem)
+      
       String nomePet = _nomePetController.text;
       String idade = _idadeController.text;
       String sexo = _isMacho ? 'Macho' : 'Fêmea';
 
-      // Incluindo Porte e Horário
+      
       String porte = selectedPorte!;
       String horario = selectedHorario!;
 
-      // Simule o envio (ou apenas exiba no console)
+      
       print('Enviando Formulário...');
       print('Nome do Pet: $nomePet');
       print('Idade: $idade');
@@ -43,67 +43,67 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
       print('Porte: $porte');
       print('Horário: $horario');
 
-      // Aqui você pode adicionar qualquer lógica adicional para enviar os dados, por exemplo, uma chamada API
+      
     } else {
-      // Caso contrário, exiba uma mensagem de erro (se necessário)
+      
       print("Preencha todos os campos obrigatórios.");
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    // Verifique se a navegação forneceu os argumentos
+    
     final arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     
-    // Verificar se 'arguments' não é null antes de acessar as chaves
-    selectedPorte = arguments?['porte'] ?? 'Porte '; // Valor padrão
-    selectedHorario = arguments?['horario'] ?? 'Horário '; // Valor padrão
+    
+    selectedPorte = arguments?['porte'] ?? 'Porte '; 
+    selectedHorario = arguments?['horario'] ?? 'Horário '; 
 
     return Scaffold(
-      backgroundColor: Color(0xff5271ff), // Cor de fundo azul #5271ff
+      backgroundColor: Color(0xff5271ff), 
       body: SafeArea(
         child: Stack(
           children: [
-            // Conteúdo principal da tela
-            SingleChildScrollView(  // Torna a tela rolável
+            
+            SingleChildScrollView(  
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: 20),
-                  // Título "Pet Feliz"
+                  
                   Text(
                     'Pet Feliz',
                     style: TextStyle(
                       fontSize: 36,
-                      color: Color(0xfff4f6ff), // Cor do texto #f4f6ff
+                      color: Color(0xfff4f6ff), 
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(height: 20),
 
-                  // Subtítulo "Dados de agendamento"
+                  
                   Text(
                     'Dados de agendamento',
                     style: TextStyle(
                       fontSize: 24,
-                      color: Color(0xfff4f6ff), // Cor do texto #f4f6ff
+                      color: Color(0xfff4f6ff), 
                     ),
                   ),
                   SizedBox(height: 20),
 
-                  // Formulário
+                  
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Container(
                       padding: EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Color(0xfff4f6ff), // Cor do fundo #f4f6ff
-                        borderRadius: BorderRadius.circular(16), // Bordas arredondadas
+                        color: Color(0xfff4f6ff), 
+                        borderRadius: BorderRadius.circular(16), 
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Exibe o Porte e Horário selecionados dentro do formulário
+                          
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -125,7 +125,7 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
                           ),
                           SizedBox(height: 20),
 
-                          // Campo Nome do Pet
+                          
                           Text(
                             'Nome do Pet',
                             style: TextStyle(
@@ -142,7 +142,7 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
                           ),
                           SizedBox(height: 20),
 
-                          // Campo Idade e Sexo na mesma linha
+                          
                           Row(
                             children: [
                               Expanded(
@@ -187,7 +187,7 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
                                             onChanged: (bool? newValue) {
                                               setState(() {
                                                 _isMacho = newValue ?? false;
-                                                _isFemea = false; // Desmarca Fêmea se Macho for selecionado
+                                                _isFemea = false; 
                                               });
                                             },
                                           ),
@@ -207,7 +207,7 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
                                             onChanged: (bool? newValue) {
                                               setState(() {
                                                 _isFemea = newValue ?? false;
-                                                _isMacho = false; // Desmarca Macho se Fêmea for selecionado
+                                                _isMacho = false; 
                                               });
                                             },
                                           ),
@@ -228,7 +228,7 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
                           ),
                           SizedBox(height: 20),
 
-                          // Campo Obs
+                          
                           Text(
                             'Obs:',
                             style: TextStyle(
@@ -250,18 +250,18 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
 
                   SizedBox(height: 20),
 
-                  // Botões Confirmar e Cancelar
+                  
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 40),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ElevatedButton(
-                          onPressed: _isFormValid() ? _enviarFormulario : null, // Habilita/Desabilita conforme a validação
+                          onPressed: _isFormValid() ? _enviarFormulario : null, 
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green, // Cor do botão Confirmar
+                            backgroundColor: Colors.green, 
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12), // Bordas arredondadas
+                              borderRadius: BorderRadius.circular(12), 
                             ),
                             padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                           ),
@@ -281,9 +281,9 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red, // Cor do botão Cancelar
+                            backgroundColor: Colors.red, 
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12), // Bordas arredondadas
+                              borderRadius: BorderRadius.circular(12), 
                             ),
                             padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                           ),
@@ -299,7 +299,7 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
                     ),
                   ),
 
-                  // Pegadas decorativas na parte inferior direita
+                  
                   Padding(
                     padding: const EdgeInsets.only(right: 16.0, bottom: 16.0, top: 20),
                     child: Align(
@@ -308,9 +308,9 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(Icons.pets, color: Color(0xfff4f6ff), size: 30),
-                          SizedBox(width: 10),  // Espaço entre as pegadas
+                          SizedBox(width: 10),  
                           Icon(Icons.pets, color: Color(0xfff4f6ff), size: 24),
-                          SizedBox(width: 10),  // Espaço entre as pegadas
+                          SizedBox(width: 10),  
                           Icon(Icons.pets, color: Color(0xfff4f6ff), size: 18),
                         ],
                       ),
@@ -320,14 +320,14 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
               ),
             ),
 
-            // Botão Voltar
+            
             Positioned(
               top: 20,
               left: 20,
               child: IconButton(
                 icon: Icon(Icons.arrow_back, color: Colors.white),
                 onPressed: () {
-                  Navigator.pop(context); // Voltar para a tela anterior
+                  Navigator.pop(context); 
                 },
               ),
             ),
