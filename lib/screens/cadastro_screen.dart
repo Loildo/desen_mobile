@@ -185,25 +185,25 @@ class _CadastroScreenState extends State<CadastroScreen> {
                     ),
                   ),
                   SizedBox(height: 16),
-                  ElevatedButton(
-                    // onPressed: _deletarBanco,
-                    onPressed: _listar,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      foregroundColor: Colors.white,
-                      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                    child: Text(
-                      'Deletar Banco',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+                  // ElevatedButton(
+                  //   onPressed: _deletarBanco,
+                  //   // onPressed: _listar,
+                  //   style: ElevatedButton.styleFrom(
+                  //     backgroundColor: Colors.red,
+                  //     foregroundColor: Colors.white,
+                  //     padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  //     shape: RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.circular(25),
+                  //     ),
+                  //   ),
+                  //   child: Text(
+                  //     'Deletar Banco',
+                  //     style: TextStyle(
+                  //       fontSize: 16,
+                  //       fontWeight: FontWeight.bold,
+                  //     ),
+                  //   ),
+                  // ),
                   SizedBox(height: 16),
                   GestureDetector(
                     onTap: () {
