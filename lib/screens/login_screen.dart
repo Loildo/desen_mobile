@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../database/database_helper.dart';
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -11,32 +11,45 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _senhaController = TextEditingController();
 
   
-  void _validarLogin() {
+  void _validarLogin() async {
     String email = _emailController.text;
     String senha = _senhaController.text;
 
-    
-    if (email == "teste@teste.teste" && senha == "123") {
-      
-      Navigator.pushNamed(context, '/agendamento');
-    } else {
-      
-      _mostrarErro();
+    if (email.isEmpty || senha.isEmpty) {
+      _mostrarErro('Por favor, preencha todos os campos.');
+      return;
+    }
+
+    try {
+      DatabaseHelper dbHelper = DatabaseHelper();
+      var usuario = await dbHelper.buscarUsuarioPorEmailSenha(email, senha);
+
+      if (usuario != null) {
+        // Login bem-sucedido, redireciona para a tela de agendamento
+        Navigator.pushNamed(context, '/agendamento');
+      } else {
+        // Credenciais incorretas
+        _mostrarErro('Email ou senha incorretos.');
+      }
+    } catch (e) {
+      print(e);
+      _mostrarErro('Erro ao verificar login: $e');
     }
   }
 
+
   
-  void _mostrarErro() {
+  void _mostrarErro(String mensagem) {
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           title: Text('Erro'),
-          content: Text('Email ou senha incorreto'),
+          content: Text(mensagem),
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(); 
+                Navigator.of(context).pop();
               },
               child: Text('OK'),
             ),
@@ -45,6 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
       },
     );
   }
+
 
   
   bool _isFormValid() {
