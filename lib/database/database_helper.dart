@@ -45,6 +45,8 @@ Future<Database> _initDatabase() async {
           sexo TEXT NOT NULL,
           porte TEXT NOT NULL,
           horario TEXT NOT NULL,
+          dia INTEGER NOT NULL,
+          mes TEXT NOT NULL,
           usuarioID INTEGER NOT NULL,
           FOREIGN KEY (usuarioID) REFERENCES Usuario (id)
         )
@@ -69,7 +71,7 @@ Future<Database> _initDatabase() async {
     return id;  // Retorna o ID do usuário inserido
   }
 
-  Future<int> inserirAgendamento(String nomePet, String idade, String sexo, String porte, String horario, int userID) async {
+  Future<int> inserirAgendamento(String nomePet, String idade, String sexo, String porte, String horario, int dia, String mes, int userID) async {
     final db = await database;
     // Inserir o usuário e pegar o ID da linha inserida
     int id = await db.insert(
@@ -80,6 +82,8 @@ Future<Database> _initDatabase() async {
         'sexo': sexo,
         'porte': porte,
         'horario': horario,
+        'dia': dia,
+        'mes': mes,
         'usuarioID': userID
       }
     );

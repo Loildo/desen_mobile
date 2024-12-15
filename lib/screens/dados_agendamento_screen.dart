@@ -14,6 +14,8 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
 
   String? selectedPorte;
   String? selectedHorario;
+  int? dia;
+  String? mes;
   int? userID;
 
   bool _isFormValid() {
@@ -42,6 +44,8 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
           sexo,
           porte,
           horario,
+          dia!,
+          mes!,
           userID!
         );
 
@@ -119,6 +123,8 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
     selectedPorte = arguments?['porte'] ?? 'Porte '; 
     selectedHorario = arguments?['horario'] ?? 'Horário '; 
     userID = arguments?['userID'] ?? 'Usuário'; 
+    dia = arguments?['dia'] ?? 'dia'; 
+    mes = arguments?['mes'] ?? 'mes'; 
 
     return Scaffold(
       backgroundColor: Color(0xff5271ff), 

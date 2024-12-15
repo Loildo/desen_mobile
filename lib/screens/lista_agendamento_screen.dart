@@ -61,6 +61,8 @@ class _ListaAgendamentoScreenState extends State<ListaAgendamentoScreen> {
                     Text('Idade: ${agendamento['idade']} anos'),
                     Text('Sexo: ${agendamento['sexo']}'),
                     Text('Porte: ${agendamento['porte']}'),
+                    Text('Dia: ${agendamento['dia']}'),
+                    Text('Mês: ${agendamento['mes']}'),
                     Text('Horário: ${agendamento['horario']}'),
                   ],
                 ),
