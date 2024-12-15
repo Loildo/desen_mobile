@@ -6,7 +6,7 @@ class HorarioScreen extends StatefulWidget {
 }
 
 class _HorarioScreenState extends State<HorarioScreen> {
-  // Listas para dias e meses
+  
   final List<int> dias = List.generate(31, (index) => index + 1);
   final List<String> meses = [
     'Janeiro',
@@ -23,13 +23,13 @@ class _HorarioScreenState extends State<HorarioScreen> {
     'Dezembro'
   ];
 
-  // Valores selecionados
+  
   int? diaSelecionado;
   String? mesSelecionado;
 
   @override
   Widget build(BuildContext context) {
-    // Recupera os argumentos passados
+    
     final Map? args = ModalRoute.of(context)?.settings.arguments as Map?;
     final String? selectedPorte = args?['porte'];
     final String? servicoSelecionado = args?['servico'];
@@ -51,13 +51,13 @@ class _HorarioScreenState extends State<HorarioScreen> {
                 SizedBox(height: 20),
                 Text('Escolha seu horário', style: TextStyle(fontSize: 28, color: Color(0xfff4f6ff))),
                 SizedBox(height: 20),
-                // Campos de seleção de dia e mês
+                
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Dropdown para selecionar o dia
+                      
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 12),
                         decoration: BoxDecoration(
@@ -88,7 +88,7 @@ class _HorarioScreenState extends State<HorarioScreen> {
                           },
                         ),
                       ),
-                      // Dropdown para selecionar o mês
+                      
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 12),
                         decoration: BoxDecoration(

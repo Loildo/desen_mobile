@@ -4,7 +4,6 @@ class ServicoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-  // Recupera o ID do usuário passado como argumento
   final int userId = ModalRoute.of(context)!.settings.arguments as int;
 
     return Scaffold(

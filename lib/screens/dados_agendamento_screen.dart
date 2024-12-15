@@ -36,7 +36,7 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
       String horario = selectedHorario!;
       
       try {
-        // Insira o agendamento no banco de dados
+        
         DatabaseHelper dbHelper = DatabaseHelper();
         int agendamentoID = await dbHelper.inserirAgendamento(
           nomePet,
@@ -49,7 +49,7 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
           userID!
         );
 
-        // Exibir modal de sucesso
+        
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -59,11 +59,11 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
               actions: [
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).pop(); // Fechar o modal
+                    Navigator.of(context).pop(); 
                     Navigator.pushReplacementNamed(
                       context,
                       '/lista_agendamentos',
-                      arguments: {'userID': userID},  // Envia o usuarioID como argumento
+                      arguments: {'userID': userID},  
                     );
                   },
                   child: Text('OK'),
@@ -73,7 +73,7 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
           },
         );
       } catch (e) {
-        // Exibir modal de erro
+        
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -83,7 +83,7 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
               actions: [
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).pop(); // Fechar o modal
+                    Navigator.of(context).pop(); 
                   },
                   child: Text('OK'),
                 ),
@@ -93,7 +93,7 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
         );
       }
     } else {
-      // Exibir modal informando que o formulário está incompleto
+      
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -103,7 +103,7 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
             actions: [
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop(); // Fechar o modal
+                  Navigator.of(context).pop(); 
                 },
                 child: Text('OK'),
               ),

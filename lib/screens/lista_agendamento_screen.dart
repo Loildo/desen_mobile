@@ -13,18 +13,16 @@ class _ListaAgendamentoScreenState extends State<ListaAgendamentoScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    // Obtém os argumentos passados para a tela, incluindo o usuarioID
     final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     int? usuarioID = args?['userID'];
-
-    // Carrega os agendamentos do usuário
+    
     if (usuarioID != null) {
       _carregarAgendamentos(usuarioID);
     }
   }
 
   Future<void> _carregarAgendamentos(int usuarioID) async {
-    // Consulta os agendamentos no banco de dados
+    
     List<Map<String, dynamic>> agendamentos = await DatabaseHelper().listarAgendamentosPorUsuario(usuarioID);
 
     setState(() {
@@ -76,8 +74,7 @@ class _ListaAgendamentoScreenState extends State<ListaAgendamentoScreen> {
                 ),
                 trailing: Icon(Icons.arrow_forward),
                 onTap: () {
-                  // Ao clicar no item, você pode abrir detalhes ou editar o agendamento
-                  // Navigator.pushNamed(context, '/detalhes_agendamento', arguments: agendamento);
+                  
                 },
               ),
             );

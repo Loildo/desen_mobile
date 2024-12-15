@@ -58,7 +58,7 @@ Future<Database> _initDatabase() async {
 
   Future<int> inserirUsuario(String nome, String email, String senha) async {
     final db = await database;
-    // Inserir o usuário e pegar o ID da linha inserida
+    
     int id = await db.insert(
       'Usuario',
       {
@@ -66,14 +66,14 @@ Future<Database> _initDatabase() async {
         'email': email,
         'senha': senha,
       },
-      // conflictAlgorithm: ConflictAlgorithm.replace,  // Caso haja conflito de ID
+      
     );
-    return id;  // Retorna o ID do usuário inserido
+    return id;  
   }
 
   Future<int> inserirAgendamento(String nomePet, String idade, String sexo, String porte, String horario, int dia, String mes, int userID) async {
     final db = await database;
-    // Inserir o usuário e pegar o ID da linha inserida
+    
     int id = await db.insert(
       'Agendamento',
       {
@@ -87,16 +87,15 @@ Future<Database> _initDatabase() async {
         'usuarioID': userID
       }
     );
-    return id;  // Retorna o ID do agendamento
+    return id;  
   }
 
 
   Future<List<String>> listarUsuarios() async {
     final db = await database;
-    // Query para pegar apenas a coluna 'nome' da tabela 'Usuario'
+    
     List<Map<String, dynamic>> resultado = await db.query('Usuario', columns: ['nome']);
     
-    // Mapeia o resultado para uma lista de nomes
     List<String> nomes = resultado.map((usuario) => usuario['nome'] as String).toList();
     print(nomes);
     return nomes;
@@ -106,29 +105,26 @@ Future<Database> _initDatabase() async {
     final db = await database;
     List<Map<String, dynamic>> resultado = await db.query(
       'Usuario',
-      columns: ['id'], // Seleciona apenas o ID
+      columns: ['id'], 
       where: 'email = ? AND senha = ?',
       whereArgs: [email, senha],
     );
 
     if (resultado.isNotEmpty) {
-      return resultado.first['id'] as int; // Retorna o ID do primeiro resultado
+      return resultado.first['id'] as int; 
     }
-    return null; // Retorna null se não encontrar
+    return null; 
   }
 
   Future<List<Map<String, dynamic>>> listarAgendamentosPorUsuario(int usuarioID) async {
     final db = await database;
     
-    // Query para listar todos os agendamentos do usuário com o ID fornecido
     List<Map<String, dynamic>> resultado = await db.query(
       'Agendamento',
       where: 'usuarioID = ?',
       whereArgs: [usuarioID],
     );
 
-    return resultado;  // Retorna a lista de agendamentos
+    return resultado;  
   }
-
-
 }

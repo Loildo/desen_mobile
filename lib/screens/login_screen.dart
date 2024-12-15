@@ -25,11 +25,9 @@ class _LoginScreenState extends State<LoginScreen> {
       int? userId = await dbHelper.buscarIdUsuarioPorEmailSenha(email, senha);
 
       if (userId != null) {
-        // Login bem-sucedido, redireciona para a próxima tela com o ID
         print('Usuário logado com ID: $userId');
         Navigator.pushNamed(context, '/agendamento', arguments: userId);
       } else {
-        // Credenciais incorretas
         _mostrarErro('Email ou senha incorretos.');
       }
     } catch (e) {

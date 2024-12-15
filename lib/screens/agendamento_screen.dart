@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AgendamentoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Recupera o ID do usuário passado como argumento
+    
     final int userId = ModalRoute.of(context)!.settings.arguments as int;
     print('ID usuario em agendamento: $userId');
     
@@ -25,7 +25,7 @@ class AgendamentoScreen extends StatelessWidget {
             
             ElevatedButton(
               onPressed: () {
-                // Passa o ID do usuário para a tela de lista de agendamentos
+                
                 Navigator.pushNamed(context, '/lista_agendamentos', arguments: {'userID': userId});
               },
               style: ElevatedButton.styleFrom(
@@ -45,7 +45,7 @@ class AgendamentoScreen extends StatelessWidget {
 
             ElevatedButton(
               onPressed: () {
-                // Passa o ID do usuário para a tela de serviço
+                
                 Navigator.pushNamed(context, '/servico', arguments: userId);
               },
               style: ElevatedButton.styleFrom(
