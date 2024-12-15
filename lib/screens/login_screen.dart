@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
       builder: (context) {
         return AlertDialog(
           title: Text('Erro'),
-          content: Text('Email e senhas incorretos'),
+          content: Text('Email ou senha incorreto'),
           actions: [
             TextButton(
               onPressed: () {
