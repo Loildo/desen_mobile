@@ -56,6 +56,11 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop(); // Fechar o modal
+                    Navigator.pushReplacementNamed(
+                      context,
+                      '/lista_agendamentos',
+                      arguments: {'userID': userID},  // Envia o usuarioID como argumento
+                    );
                   },
                   child: Text('OK'),
                 ),

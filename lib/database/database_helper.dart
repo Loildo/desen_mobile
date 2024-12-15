@@ -113,5 +113,18 @@ Future<Database> _initDatabase() async {
     return null; // Retorna null se não encontrar
   }
 
+  Future<List<Map<String, dynamic>>> listarAgendamentosPorUsuario(int usuarioID) async {
+    final db = await database;
+    
+    // Query para listar todos os agendamentos do usuário com o ID fornecido
+    List<Map<String, dynamic>> resultado = await db.query(
+      'Agendamento',
+      where: 'usuarioID = ?',
+      whereArgs: [usuarioID],
+    );
+
+    return resultado;  // Retorna a lista de agendamentos
+  }
+
 
 }

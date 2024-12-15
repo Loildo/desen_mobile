@@ -25,6 +25,26 @@ class AgendamentoScreen extends StatelessWidget {
             
             ElevatedButton(
               onPressed: () {
+                // Passa o ID do usuário para a tela de lista de agendamentos
+                Navigator.pushNamed(context, '/lista_agendamentos', arguments: {'userID': userId});
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                foregroundColor: Color(0xff5271ff),
+                padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+              ),
+              child: Text(
+                'Meus Agendamentos',
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+            SizedBox(height: 20),
+
+            ElevatedButton(
+              onPressed: () {
                 // Passa o ID do usuário para a tela de serviço
                 Navigator.pushNamed(context, '/servico', arguments: userId);
               },
