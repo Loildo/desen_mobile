@@ -79,18 +79,20 @@ Future<Database> _initDatabase() async {
     return nomes;
   }
 
-  Future<Map<String, dynamic>?> buscarUsuarioPorEmailSenha(String email, String senha) async {
+  Future<int?> buscarIdUsuarioPorEmailSenha(String email, String senha) async {
     final db = await database;
     List<Map<String, dynamic>> resultado = await db.query(
       'Usuario',
+      columns: ['id'], // Seleciona apenas o ID
       where: 'email = ? AND senha = ?',
       whereArgs: [email, senha],
     );
-    
+
     if (resultado.isNotEmpty) {
-      return resultado.first; // Retorna o primeiro resultado
+      return resultado.first['id'] as int; // Retorna o ID do primeiro resultado
     }
     return null; // Retorna null se não encontrar
   }
+
 
 }

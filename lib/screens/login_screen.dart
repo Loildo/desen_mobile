@@ -22,11 +22,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       DatabaseHelper dbHelper = DatabaseHelper();
-      var usuario = await dbHelper.buscarUsuarioPorEmailSenha(email, senha);
+      int? userId = await dbHelper.buscarIdUsuarioPorEmailSenha(email, senha);
 
-      if (usuario != null) {
-        // Login bem-sucedido, redireciona para a tela de agendamento
-        Navigator.pushNamed(context, '/agendamento');
+      if (userId != null) {
+        // Login bem-sucedido, redireciona para a próxima tela com o ID
+        print('Usuário logado com ID: $userId');
+        Navigator.pushNamed(context, '/agendamento', arguments: userId);
       } else {
         // Credenciais incorretas
         _mostrarErro('Email ou senha incorretos.');
@@ -36,6 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
       _mostrarErro('Erro ao verificar login: $e');
     }
   }
+
 
 
   
