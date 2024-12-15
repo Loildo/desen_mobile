@@ -8,15 +8,15 @@ class ListaAgendamentoScreen extends StatefulWidget {
 
 class _ListaAgendamentoScreenState extends State<ListaAgendamentoScreen> {
   List<Map<String, dynamic>> _agendamentos = [];
-  
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    
+
     // Obtém os argumentos passados para a tela, incluindo o usuarioID
     final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     int? usuarioID = args?['userID'];
-    
+
     // Carrega os agendamentos do usuário
     if (usuarioID != null) {
       _carregarAgendamentos(usuarioID);
@@ -26,7 +26,7 @@ class _ListaAgendamentoScreenState extends State<ListaAgendamentoScreen> {
   Future<void> _carregarAgendamentos(int usuarioID) async {
     // Consulta os agendamentos no banco de dados
     List<Map<String, dynamic>> agendamentos = await DatabaseHelper().listarAgendamentosPorUsuario(usuarioID);
-    
+
     setState(() {
       _agendamentos = agendamentos;
     });
@@ -34,19 +34,27 @@ class _ListaAgendamentoScreenState extends State<ListaAgendamentoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    int usuarioID = args?['userID'];
     return Scaffold(
       backgroundColor: Color(0xff5271ff),
       appBar: AppBar(
         title: Text('Meus Agendamentos'),
         backgroundColor: Color(0xff5271ff),
         elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pushNamed(context, '/agendamento', arguments: usuarioID );
+          },
+        ),
       ),
       body: SafeArea(
         child: ListView.builder(
           itemCount: _agendamentos.length,
           itemBuilder: (context, index) {
             final agendamento = _agendamentos[index];
-            
+
             return Card(
               margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               elevation: 5,
