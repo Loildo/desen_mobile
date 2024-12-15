@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -39,7 +41,7 @@ Future<Database> _initDatabase() async {
         CREATE TABLE Agendamento (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           nomePet TEXT NOT NULL,
-          idade INTEGER NOT NULL,
+          idade TEXT NOT NULL,
           sexo TEXT NOT NULL,
           porte TEXT NOT NULL,
           horario TEXT NOT NULL,
@@ -65,6 +67,23 @@ Future<Database> _initDatabase() async {
       // conflictAlgorithm: ConflictAlgorithm.replace,  // Caso haja conflito de ID
     );
     return id;  // Retorna o ID do usuário inserido
+  }
+
+  Future<int> inserirAgendamento(String nomePet, String idade, String sexo, String porte, String horario, int userID) async {
+    final db = await database;
+    // Inserir o usuário e pegar o ID da linha inserida
+    int id = await db.insert(
+      'Agendamento',
+      {
+        'nomePet': nomePet,
+        'idade': idade,
+        'sexo': sexo,
+        'porte': porte,
+        'horario': horario,
+        'usuarioID': userID
+      }
+    );
+    return id;  // Retorna o ID do agendamento
   }
 
 

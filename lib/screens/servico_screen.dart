@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 class ServicoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+  // Recupera o ID do usuário passado como argumento
+  final int userId = ModalRoute.of(context)!.settings.arguments as int;
+
     return Scaffold(
       backgroundColor: Color(0xff5271ff),
       body: SafeArea(
@@ -29,7 +33,8 @@ class ServicoScreen extends StatelessWidget {
                         context,
                         '/porte',
                         arguments: {
-                          'servico': 'Banho', 
+                          'servico': 'Banho',
+                          'userID': userId
                         },
                       );
                     },
@@ -54,7 +59,8 @@ class ServicoScreen extends StatelessWidget {
                         context,
                         '/porte',
                         arguments: {
-                          'servico': 'Tosa', 
+                          'servico': 'Tosa',
+                          'userID': userId
                         },
                       );
                     },

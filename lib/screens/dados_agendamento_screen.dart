@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../database/database_helper.dart';
 
 class DadosAgendamentoScreen extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
 
   String? selectedPorte;
   String? selectedHorario;
+  int? userID;
 
   bool _isFormValid() {
     
@@ -23,30 +25,83 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
         selectedHorario != null;
   }
 
-  void _enviarFormulario() {
-    
+  void _salvarAgendamento() async {
     if (_isFormValid()) {
-      
       String nomePet = _nomePetController.text;
       String idade = _idadeController.text;
       String sexo = _isMacho ? 'Macho' : 'Fêmea';
-
-      
       String porte = selectedPorte!;
       String horario = selectedHorario!;
-
       
-      print('Enviando Formulário...');
-      print('Nome do Pet: $nomePet');
-      print('Idade: $idade');
-      print('Sexo: $sexo');
-      print('Porte: $porte');
-      print('Horário: $horario');
+      try {
+        // Insira o agendamento no banco de dados
+        DatabaseHelper dbHelper = DatabaseHelper();
+        int agendamentoID = await dbHelper.inserirAgendamento(
+          nomePet,
+          idade,
+          sexo,
+          porte,
+          horario,
+          userID!
+        );
 
-      
+        // Exibir modal de sucesso
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Sucesso'),
+              content: Text('Agendamento realizado com sucesso! ID: $agendamentoID'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // Fechar o modal
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      } catch (e) {
+        // Exibir modal de erro
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Erro'),
+              content: Text('Erro ao salvar agendamento: $e'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // Fechar o modal
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      }
     } else {
-      
-      print("Preencha todos os campos obrigatórios.");
+      // Exibir modal informando que o formulário está incompleto
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Atenção'),
+            content: Text('Preencha todos os campos obrigatórios.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Fechar o modal
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
     }
   }
 
@@ -58,6 +113,7 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
     
     selectedPorte = arguments?['porte'] ?? 'Porte '; 
     selectedHorario = arguments?['horario'] ?? 'Horário '; 
+    userID = arguments?['userID'] ?? 'Usuário'; 
 
     return Scaffold(
       backgroundColor: Color(0xff5271ff), 
@@ -257,7 +313,7 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ElevatedButton(
-                          onPressed: _isFormValid() ? _enviarFormulario : null, 
+                          onPressed: _isFormValid() ? _salvarAgendamento : null, 
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green, 
                             shape: RoundedRectangleBorder(
@@ -277,7 +333,8 @@ class _DadosAgendamentoScreenState extends State<DadosAgendamentoScreen> {
                           onPressed: () {
                              Navigator.pushNamed(
                               context,
-                              '/agendamento'
+                              '/agendamento',
+                              arguments: userID
                             );
                           },
                           style: ElevatedButton.styleFrom(

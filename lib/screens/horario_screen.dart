@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 class HorarioScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    
-    final String? selectedPorte = ModalRoute.of(context)?.settings.arguments as String?;
+    // Recupera os argumentos passados
+    final Map? args = ModalRoute.of(context)?.settings.arguments as Map?;
+    final String? selectedPorte = args?['porte'];
+    final String? servicoSelecionado = args?['servico'];
+    final int? userID = args?['userID'];
 
     return Scaffold(
       backgroundColor: Color(0xff5271ff),
       body: SafeArea(
         child: Stack(
           children: [
-            
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -40,15 +42,16 @@ class HorarioScreen extends StatelessWidget {
 
                         return ElevatedButton(
                           onPressed: () {
-                            
                             print('Horário selecionado: $horaFormatada');
-                            
+                            // Envia os dados para a próxima tela
                             Navigator.pushNamed(
                               context,
                               '/dados_agendamento',
                               arguments: {
                                 'porte': selectedPorte,
+                                'servico': servicoSelecionado,
                                 'horario': horaFormatada,
+                                'userID': userID,
                               },
                             );
                           },
@@ -72,15 +75,13 @@ class HorarioScreen extends StatelessWidget {
                 ),
               ],
             ),
-
-            
             Positioned(
               top: 20,
               left: 20,
               child: IconButton(
                 icon: Icon(Icons.arrow_back, color: Colors.white),
                 onPressed: () {
-                  Navigator.pop(context);  
+                  Navigator.pop(context);
                 },
               ),
             ),

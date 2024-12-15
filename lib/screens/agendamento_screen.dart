@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AgendamentoScreen extends StatelessWidget {
-
-  
-  void _deslogarUsuario(BuildContext context) {
-    print("sair");
-    Navigator.pushReplacementNamed(context, '/login');
-  }
-
   @override
   Widget build(BuildContext context) {
+    // Recupera o ID do usuário passado como argumento
+    final int userId = ModalRoute.of(context)!.settings.arguments as int;
+    print('ID usuario em agendamento: $userId');
+    
     return Scaffold(
       backgroundColor: Color(0xff5271ff),
       body: Center(
@@ -28,7 +25,8 @@ class AgendamentoScreen extends StatelessWidget {
             
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/servico');
+                // Passa o ID do usuário para a tela de serviço
+                Navigator.pushNamed(context, '/servico', arguments: userId);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
@@ -83,5 +81,9 @@ class AgendamentoScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _deslogarUsuario(BuildContext context) {
+    Navigator.pushReplacementNamed(context, '/login');
   }
 }

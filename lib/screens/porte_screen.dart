@@ -8,15 +8,15 @@ class PorteScreen extends StatefulWidget {
 class _PorteScreenState extends State<PorteScreen> {
   String? selectedPorte;
   String? servicoSelecionado;
+  Map? args;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    
-    final args = ModalRoute.of(context)!.settings.arguments as Map?;
-    if (args != null && args['servico'] != null) {
+    args = ModalRoute.of(context)!.settings.arguments as Map?;
+    if (args != null && args!['servico'] != null) {
       setState(() {
-        servicoSelecionado = args['servico'];
+        servicoSelecionado = args!['servico'];
       });
     }
   }
@@ -28,7 +28,6 @@ class _PorteScreenState extends State<PorteScreen> {
       body: SafeArea(
         child: Stack(
           children: [
-            
             Column(
               children: [
                 Spacer(),
@@ -49,27 +48,21 @@ class _PorteScreenState extends State<PorteScreen> {
                     ),
                     child: Column(
                       children: [
-                        
                         if (servicoSelecionado != null)
                           Padding(
-                            padding: const EdgeInsets.only(bottom: 20), 
+                            padding: const EdgeInsets.only(bottom: 20),
                             child: Text(
-                              'Serviço: $servicoSelecionado', 
+                              'Serviço: $servicoSelecionado',
                               style: TextStyle(fontSize: 22, color: Color(0xff5271ff)),
                             ),
                           ),
-                        
                         Row(
                           children: [
                             Checkbox(
                               value: selectedPorte == 'Pequeno',
                               onChanged: (bool? value) {
                                 setState(() {
-                                  if (value == true) {
-                                    selectedPorte = 'Pequeno';
-                                  } else {
-                                    selectedPorte = null;
-                                  }
+                                  selectedPorte = value == true ? 'Pequeno' : null;
                                 });
                               },
                               activeColor: Color(0xff5271ff),
@@ -77,42 +70,32 @@ class _PorteScreenState extends State<PorteScreen> {
                             Text('Porte pequeno', style: TextStyle(fontSize: 18, color: Color(0xff5271ff))),
                           ],
                         ),
-                        
                         Row(
                           children: [
                             Checkbox(
                               value: selectedPorte == 'Medio',
                               onChanged: (bool? value) {
                                 setState(() {
-                                  if (value == true) {
-                                    selectedPorte = 'Medio';
-                                  } else {
-                                    selectedPorte = null;
-                                  }
+                                  selectedPorte = value == true ? 'Medio' : null;
                                 });
                               },
                               activeColor: Color(0xff5271ff),
                             ),
-                            Text('Porte Medio', style: TextStyle(fontSize: 18, color: Color(0xff5271ff))),
+                            Text('Porte Médio', style: TextStyle(fontSize: 18, color: Color(0xff5271ff))),
                           ],
                         ),
-                        
                         Row(
                           children: [
                             Checkbox(
                               value: selectedPorte == 'Grande',
                               onChanged: (bool? value) {
                                 setState(() {
-                                  if (value == true) {
-                                    selectedPorte = 'Grande';
-                                  } else {
-                                    selectedPorte = null;
-                                  }
+                                  selectedPorte = value == true ? 'Grande' : null;
                                 });
                               },
                               activeColor: Color(0xff5271ff),
                             ),
-                            Text('Porte grande', style: TextStyle(fontSize: 18, color: Color(0xff5271ff))),
+                            Text('Porte Grande', style: TextStyle(fontSize: 18, color: Color(0xff5271ff))),
                           ],
                         ),
                       ],
@@ -120,20 +103,22 @@ class _PorteScreenState extends State<PorteScreen> {
                   ),
                 ),
                 SizedBox(height: 30),
-                
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center, 
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(
                         onPressed: selectedPorte != null
                             ? () {
-                                
                                 Navigator.pushNamed(
                                   context,
                                   '/horario',
-                                  arguments: selectedPorte, 
+                                  arguments: {
+                                    'servico': servicoSelecionado,
+                                    'porte': selectedPorte,
+                                    'userID': args!['userID'],
+                                  },
                                 );
                               }
                             : null,
@@ -146,14 +131,16 @@ class _PorteScreenState extends State<PorteScreen> {
                         ),
                         child: Text(
                           'Próximo',
-                          style: TextStyle(fontSize: 18, color: selectedPorte != null ? Colors.white : Color(0xff5271ff)),
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: selectedPorte != null ? Colors.white : Color(0xff5271ff),
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
                 Spacer(),
-                
                 Padding(
                   padding: const EdgeInsets.only(right: 16.0, bottom: 16.0),
                   child: Align(
@@ -172,15 +159,13 @@ class _PorteScreenState extends State<PorteScreen> {
                 ),
               ],
             ),
-
-            
             Positioned(
               top: 20,
               left: 20,
               child: IconButton(
                 icon: Icon(Icons.arrow_back, color: Colors.white),
                 onPressed: () {
-                  Navigator.pop(context);  
+                  Navigator.pop(context);
                 },
               ),
             ),
